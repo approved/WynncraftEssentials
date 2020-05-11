@@ -1,0 +1,38 @@
+{
+    "schemaVersion": 1,
+    "id": "wynncraftessentials",
+    "version": "${version}",
+
+    "name": "Wynncraft Essentials",
+    "description": "This mod is designed to help make life in the world of Wynn easier!",
+    "authors": [
+        "Nick Kennedy"
+    ],
+    "contact": {
+        "homepage": "https://fabricmc.net/",
+        "sources": "https://github.com/FabricMC/fabric-example-mod"
+    },
+
+    "license": "CC0-1.0",
+    "icon": "assets/wynncraftessentials/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [],
+        "client": [
+            "dev.odd.wynncraftessentials.WynncraftEssentials"
+        ]
+    },
+    "mixins": [
+        "wcessentials-modules.mixins.json"
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.15.x"
+    },
+    "suggests": {
+        "flamingo": "*"
+    }
+}

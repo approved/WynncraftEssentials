@@ -1,0 +1,13 @@
+{
+    "wcessentials.prefix": "WCESSENTIALS",
+    "key.categories.wcessentials": "Wynncraft Essentials",
+    "key.wcessentials.nextplayerrendermode": "Next Player Render Mode",
+    "key.wcessentials.lastplayerrendermode": "Previous Player Render Mode",
+    "key.wcessentials.skillone": "Active Skill 1",
+    "key.wcessentials.skilltwo": "Active Skill 2",
+    "key.wcessentials.skillthree": "Active Skill 3",
+    "key.wcessentials.skillfour": "Active Skill 4",
+    "key.wcessentials.questbook": "Questbook",
+    "key.wcessentials.charactersheet": "Character Sheet",
+    "wcessentials.rendermode_cycle": "Render Mode: %s"
+}

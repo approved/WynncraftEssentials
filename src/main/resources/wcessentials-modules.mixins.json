@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "dev.odd.wynncraftessentials.mixins.modules",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [],
+    "client": [
+        "render.HidePlayersMixin",
+        "network.ServerConnectionMixin",
+        "network.PacketListener",
+        "utils.ChatMixin",
+        "gui.DisplayItemUsages"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
