@@ -14,7 +14,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 
 @Mixin(ItemRenderer.class)
-public abstract class PotionChargesDisplay {
+public abstract class DisplayItemUsages {
 
     @Deprecated
     Pattern potionNameMatch = Pattern.compile("^(§[a-z0-9])?Potion of .*\\[(\\d)\\/\\d\\]");
