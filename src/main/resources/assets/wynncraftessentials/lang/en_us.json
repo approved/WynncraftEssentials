@@ -1,6 +1,7 @@
 {
     "wcessentials.prefix": "WCESSENTIALS",
     "key.categories.wcessentials": "Wynncraft Essentials",
+    "key.categories.wcessentials.render": "Wynncraft Essentials Render",
     "key.wcessentials.nextplayerrendermode": "Next Player Render Mode",
     "key.wcessentials.lastplayerrendermode": "Previous Player Render Mode",
     "key.wcessentials.skillone": "Active Skill 1",

@@ -12,48 +12,51 @@ import net.minecraft.util.Identifier;
 
 public class ClientKeybinds {
 
+	private static final String GlobalCategory = "key.categories.wcessentials";
+	private static final String RenderCategory = "key.categories.wcessentials.render";
+
 	public static final FabricKeyBinding nextPlayerRenderMode = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "nextplayerrendermode"), InputUtil.Type.KEYSYM,
-					GLFW.GLFW_KEY_RIGHT_BRACKET, "key.categories.wcessentials")
+					GLFW.GLFW_KEY_RIGHT_BRACKET, RenderCategory)
 			.build();
 
 	public static final FabricKeyBinding lastPlayerRenderMode = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "lastplayerrendermode"), InputUtil.Type.KEYSYM,
-					GLFW.GLFW_KEY_LEFT_BRACKET, "key.categories.wcessentials")
+					GLFW.GLFW_KEY_LEFT_BRACKET, RenderCategory)
 			.build();
 
 	public static final FabricKeyBinding skillOne = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "skillone"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), "key.categories.wcessentials")
+					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
 			.build();
 
 	public static final FabricKeyBinding skillTwo = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "skilltwo"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), "key.categories.wcessentials")
+					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
 			.build();
 
 	public static final FabricKeyBinding skillThree = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "skillthree"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), "key.categories.wcessentials")
+					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
 			.build();
 
 	public static final FabricKeyBinding skillFour = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "skillfour"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), "key.categories.wcessentials")
+					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
 			.build();
 
 	public static final FabricKeyBinding characterSheet = FabricKeyBinding.Builder
 			.create(new Identifier("wcessentials", "charactersheet"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C,
-					"key.categories.wcessentials")
+					GlobalCategory)
 			.build();
 
 	public static final FabricKeyBinding questbook = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "questbook"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H,
-					"key.categories.wcessentials")
+			.create(new Identifier("wcessentials", "questbook"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, GlobalCategory)
 			.build();
 
 	public static void Register() {
-		KeyBindingRegistry.INSTANCE.addCategory("key.categories.wcessentials");
+		KeyBindingRegistry.INSTANCE.addCategory(GlobalCategory);
+		KeyBindingRegistry.INSTANCE.addCategory(RenderCategory);
 
 		// Hide Player Mode
 		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.nextPlayerRenderMode);
@@ -82,7 +85,7 @@ public class ClientKeybinds {
 			HidePlayers.previousRenderMode();
 		}
 
-		if(questbook.wasPressed()) {
+		if (questbook.wasPressed()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			int lastSlot = client.player.inventory.selectedSlot;
 			client.player.inventory.selectedSlot = 7;
@@ -90,7 +93,7 @@ public class ClientKeybinds {
 			client.player.inventory.selectedSlot = lastSlot;
 		}
 
-		if(characterSheet.wasPressed()) {
+		if (characterSheet.wasPressed()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			int lastSlot = client.player.inventory.selectedSlot;
 			client.player.inventory.selectedSlot = 6;
