@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.font.TextRenderer;
@@ -27,8 +28,8 @@ public abstract class DisplayItemUsages {
      */
     @Inject(at = @At("HEAD"), method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;II)V", cancellable = true)
     public void onRenderItemOverlay(TextRenderer fontRenderer, ItemStack stack, int x, int y, CallbackInfo ci) {
-        String potionName = stack.getName().asString().trim();
-        Matcher m = itemUsagePattern.matcher(potionName);
+        String itemName = stack.getName().asString().trim();
+        Matcher m = itemUsagePattern.matcher(itemName);
         if (m.matches()) {
             this.renderGuiItemOverlay(fontRenderer, stack, x, y, m.group(1));
             ci.cancel();
