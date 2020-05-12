@@ -1,5 +1,7 @@
 package dev.odd.wynncraftessentials.mixins.modules.utils;
 
+import java.util.regex.Pattern;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,6 +16,9 @@ import net.minecraft.text.Text;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ChatMixin {
+
+    Pattern friendsListPattern = Pattern.compile("^[a-zA-Z0-9_-]+'(s)? friends \\(\\d+\\):.*");
+    Pattern partyPattern = Pattern.compile("^.*Party list:.*");
 
     @Inject(at = @At("HEAD"), method = "onChatMessage", cancellable = true)
     public void onChatMessageRecieved(ChatMessageS2CPacket packet, CallbackInfo ci) {
@@ -39,7 +44,7 @@ public abstract class ChatMixin {
                      * members of each group
                      */
 
-                    if (strMessage.matches("^[a-zA-Z0-9_-]+'(s)? friends \\(\\d+\\):.*")) {
+                    if (friendsListPattern.matcher(strMessage).matches()) {
                         WynncraftEssentials.WCLogger.info("Matched friends list");
                         String[] friends = message.getSiblings().get(1).asString().split(",");
                         for (String friend : friends) {
@@ -51,7 +56,7 @@ public abstract class ChatMixin {
                         ci.cancel();
                     }
 
-                    if (strMessage.matches("^Party list:.*")) {
+                    if (partyPattern.matcher(strMessage).matches()) {
                         WynncraftEssentials.WCLogger.info("Matched party list");
                         String[] partyMembers = message.getSiblings().get(1).asString().split(",");
                         for (String member : partyMembers) {
