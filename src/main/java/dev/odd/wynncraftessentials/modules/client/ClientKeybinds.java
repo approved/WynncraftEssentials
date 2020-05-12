@@ -3,6 +3,7 @@ package dev.odd.wynncraftessentials.modules.client;
 import org.lwjgl.glfw.GLFW;
 
 import dev.odd.wynncraftessentials.modules.render.HidePlayers;
+import dev.odd.wynncraftessentials.utils.ClientUtils;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -54,6 +55,10 @@ public class ClientKeybinds {
 			.create(new Identifier("wcessentials", "questbook"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, GlobalCategory)
 			.build();
 
+	public static final FabricKeyBinding autowalk = FabricKeyBinding.Builder
+			.create(new Identifier("wcessentials", "autowalk"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, GlobalCategory)
+			.build();
+
 	public static void Register() {
 		KeyBindingRegistry.INSTANCE.addCategory(GlobalCategory);
 		KeyBindingRegistry.INSTANCE.addCategory(RenderCategory);
@@ -71,21 +76,24 @@ public class ClientKeybinds {
 		// Questbook and Character Sheet Hotkey
 		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.questbook);
 		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.characterSheet);
+
+		// Client utility
+		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.autowalk);
 	}
 
 	public static void Process() {
 		/**
 		 * Execute Changing Player Render Mode
 		 */
-		if (nextPlayerRenderMode.wasPressed()) {
+		if (ClientKeybinds.nextPlayerRenderMode.wasPressed()) {
 			HidePlayers.nextRenderMode();
 		}
 
-		if (lastPlayerRenderMode.wasPressed()) {
+		if (ClientKeybinds.lastPlayerRenderMode.wasPressed()) {
 			HidePlayers.previousRenderMode();
 		}
 
-		if (questbook.wasPressed()) {
+		if (ClientKeybinds.questbook.wasPressed()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			int lastSlot = client.player.inventory.selectedSlot;
 			client.player.inventory.selectedSlot = 7;
@@ -93,12 +101,16 @@ public class ClientKeybinds {
 			client.player.inventory.selectedSlot = lastSlot;
 		}
 
-		if (characterSheet.wasPressed()) {
+		if (ClientKeybinds.characterSheet.wasPressed()) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			int lastSlot = client.player.inventory.selectedSlot;
 			client.player.inventory.selectedSlot = 6;
 			client.interactionManager.interactItem(client.player, client.world.getWorld(), Hand.MAIN_HAND);
 			client.player.inventory.selectedSlot = lastSlot;
+		}
+
+		if (ClientKeybinds.autowalk.wasPressed()) {
+			ClientUtils.autoWalk = !ClientUtils.autoWalk;
 		}
 	}
 }

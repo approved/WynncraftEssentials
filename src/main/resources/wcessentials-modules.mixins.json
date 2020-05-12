@@ -9,7 +9,8 @@
         "network.ServerConnectionMixin",
         "network.PacketListener",
         "utils.ChatMixin",
-        "gui.DisplayItemUsages"
+        "gui.DisplayItemUsages",
+        "client.AutowalkMixin"
     ],
     "injectors": {
         "defaultRequire": 1
