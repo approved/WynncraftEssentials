@@ -1,6 +1,7 @@
 package dev.odd.wynncraftessentials.modules.render;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 public class HidePlayers {
@@ -36,15 +37,24 @@ public class HidePlayers {
         return currentRenderMode;
     }
 
-    public static PlayerRenderMode nextRenderMode() {
+    public static void nextRenderMode() {
         currentRenderMode = currentRenderMode.next();
-        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new TranslatableText("wcessentials.prefix").append(" ").append(new TranslatableText("wcessentials.rendermode_cycle", HidePlayers.getRenderMode())));
-        return currentRenderMode;
+        addCycleChatMessage();
     }
 
-    public static PlayerRenderMode previousRenderMode() {
+    public static void previousRenderMode() {
         currentRenderMode = currentRenderMode.previous();
-        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new TranslatableText("wcessentials.prefix").append(" ").append(new TranslatableText("wcessentials.rendermode_cycle", HidePlayers.getRenderMode())));
-        return currentRenderMode;
+        addCycleChatMessage();
+    }
+
+    private static void addCycleChatMessage() {
+        MinecraftClient.getInstance()
+                .inGameHud.getChatHud()
+                .addMessage(new LiteralText("[")
+                        .append(new TranslatableText("wcessentials.prefix"))
+                        .append("]")
+                        .append(" ")
+                        .append(new TranslatableText("wcessentials.rendermode.cycle", HidePlayers.getRenderMode()))
+                );
     }
 }

@@ -1,11 +1,12 @@
 package dev.odd.wynncraftessentials.modules.client;
 
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.entity.player.PlayerInventory;
 import org.lwjgl.glfw.GLFW;
 
 import dev.odd.wynncraftessentials.modules.render.HidePlayers;
 import dev.odd.wynncraftessentials.utils.ClientUtils;
-import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
-import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Hand;
@@ -16,73 +17,92 @@ public class ClientKeybinds {
 	private static final String GlobalCategory = "key.categories.wcessentials";
 	private static final String RenderCategory = "key.categories.wcessentials.render";
 
-	public static final FabricKeyBinding nextPlayerRenderMode = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "nextplayerrendermode"), InputUtil.Type.KEYSYM,
-					GLFW.GLFW_KEY_RIGHT_BRACKET, RenderCategory)
-			.build();
-
-	public static final FabricKeyBinding lastPlayerRenderMode = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "lastplayerrendermode"), InputUtil.Type.KEYSYM,
-					GLFW.GLFW_KEY_LEFT_BRACKET, RenderCategory)
-			.build();
-
-	public static final FabricKeyBinding skillOne = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "skillone"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding skillTwo = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "skilltwo"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding skillThree = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "skillthree"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding skillFour = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "skillfour"), InputUtil.Type.KEYSYM,
-					InputUtil.UNKNOWN_KEYCODE.getKeyCode(), GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding characterSheet = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "charactersheet"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C,
-					GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding questbook = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "questbook"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, GlobalCategory)
-			.build();
-
-	public static final FabricKeyBinding autowalk = FabricKeyBinding.Builder
-			.create(new Identifier("wcessentials", "autowalk"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, GlobalCategory)
-			.build();
+	public static KeyBinding nextPlayerRenderMode;
+	public static KeyBinding lastPlayerRenderMode;
+	public static KeyBinding skillOne;
+	public static KeyBinding skillTwo;
+	public static KeyBinding skillThree;
+	public static KeyBinding skillFour;
+	public static KeyBinding characterSheet;
+	public static KeyBinding questbook;
+	public static KeyBinding autowalk;
 
 	public static void Register() {
-		KeyBindingRegistry.INSTANCE.addCategory(GlobalCategory);
-		KeyBindingRegistry.INSTANCE.addCategory(RenderCategory);
+		nextPlayerRenderMode = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.nextplayerrendermode",
+						InputUtil.Type.KEYSYM,
+						GLFW.GLFW_KEY_RIGHT_BRACKET,
+						RenderCategory
+				));
 
-		// Hide Player Mode
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.nextPlayerRenderMode);
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.lastPlayerRenderMode);
+		lastPlayerRenderMode = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.lastplayerrendermode",
+						InputUtil.Type.KEYSYM,
+						GLFW.GLFW_KEY_LEFT_BRACKET,
+						RenderCategory
+				));
 
-		// Rebind Skills
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.skillOne);
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.skillTwo);
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.skillThree);
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.skillFour);
+		skillOne = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.skillone",
+						InputUtil.Type.KEYSYM,
+						InputUtil.UNKNOWN_KEY.getCode(),
+						GlobalCategory
+				));
 
-		// Questbook and Character Sheet Hotkey
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.questbook);
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.characterSheet);
+		skillTwo = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.skilltwo",
+						InputUtil.Type.KEYSYM,
+						InputUtil.UNKNOWN_KEY.getCode(),
+						GlobalCategory
+				));
 
-		// Client utility
-		KeyBindingRegistry.INSTANCE.register(ClientKeybinds.autowalk);
+		skillThree = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.skillthree",
+						InputUtil.Type.KEYSYM,
+						InputUtil.UNKNOWN_KEY.getCode(),
+						GlobalCategory
+				));
+
+		skillFour = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.skillfour",
+						InputUtil.Type.KEYSYM,
+						InputUtil.UNKNOWN_KEY.getCode(),
+						GlobalCategory
+				));
+
+		characterSheet = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.charactersheet",
+						InputUtil.Type.KEYSYM,
+						GLFW.GLFW_KEY_C,
+						GlobalCategory
+				));
+
+		questbook = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.questbook",
+						InputUtil.Type.KEYSYM,
+						GLFW.GLFW_KEY_H,
+						GlobalCategory
+				));
+
+		autowalk = KeyBindingHelper.registerKeyBinding(
+				new KeyBinding(
+						"key.wcessentials.autowalk",
+						InputUtil.Type.KEYSYM,
+						GLFW.GLFW_KEY_B,
+						GlobalCategory
+				));
 	}
 
 	public static void Process() {
-		/**
+		/*
 		 * Execute Changing Player Render Mode
 		 */
 		if (ClientKeybinds.nextPlayerRenderMode.wasPressed()) {
@@ -94,23 +114,27 @@ public class ClientKeybinds {
 		}
 
 		if (ClientKeybinds.questbook.wasPressed()) {
-			MinecraftClient client = MinecraftClient.getInstance();
-			int lastSlot = client.player.inventory.selectedSlot;
-			client.player.inventory.selectedSlot = 7;
-			client.interactionManager.interactItem(client.player, client.world.getWorld(), Hand.MAIN_HAND);
-			client.player.inventory.selectedSlot = lastSlot;
+			swapSelectInventorySlot(7);
 		}
 
 		if (ClientKeybinds.characterSheet.wasPressed()) {
-			MinecraftClient client = MinecraftClient.getInstance();
-			int lastSlot = client.player.inventory.selectedSlot;
-			client.player.inventory.selectedSlot = 6;
-			client.interactionManager.interactItem(client.player, client.world.getWorld(), Hand.MAIN_HAND);
-			client.player.inventory.selectedSlot = lastSlot;
+			swapSelectInventorySlot(6);
 		}
 
 		if (ClientKeybinds.autowalk.wasPressed()) {
 			ClientUtils.autoWalk = !ClientUtils.autoWalk;
+		}
+	}
+
+	private static void swapSelectInventorySlot(int desiredSlot) {
+		MinecraftClient client = MinecraftClient.getInstance();
+		if (client.player != null) {
+			assert client.interactionManager != null;
+			PlayerInventory inventory = client.player.getInventory();
+			int lastSlot = inventory.selectedSlot;
+			inventory.selectedSlot = desiredSlot;
+			client.interactionManager.interactItem(client.player, client.world, Hand.MAIN_HAND);
+			inventory.selectedSlot = lastSlot;
 		}
 	}
 }

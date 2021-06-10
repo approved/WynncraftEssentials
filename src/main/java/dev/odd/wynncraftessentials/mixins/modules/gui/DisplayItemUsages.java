@@ -25,7 +25,7 @@ public abstract class DisplayItemUsages {
     Pattern itemUsagePattern = Pattern.compile("^.*\\[(\\d)\\/\\d\\]");
 
     @Shadow
-    float zOffset;
+    public float zOffset;
 
     @Inject(at = @At(value = "INVOKE", target = "net/minecraft/item/ItemStack.getCount()I"),
             method = "renderGuiItemOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
@@ -39,7 +39,7 @@ public abstract class DisplayItemUsages {
                 String string = m.group(1);
                 matrixStack.translate(0.0D, 0.0D, (double)(this.zOffset + 200.0F));
                 VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-                fontRenderer.draw(string, (float)(x + 19 - 2 - fontRenderer.getStringWidth(string)), (float)(y + 6 + 3), 16777215, true, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+                fontRenderer.draw(string, (float)(x + 19 - 2 - fontRenderer.getWidth(string)), (float)(y + 6 + 3), 16777215, true, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
                 immediate.draw();
             }
          }

@@ -8,7 +8,8 @@
     "key.wcessentials.skilltwo": "Active Skill 2",
     "key.wcessentials.skillthree": "Active Skill 3",
     "key.wcessentials.skillfour": "Active Skill 4",
-    "key.wcessentials.questbook": "Questbook",
-    "key.wcessentials.charactersheet": "Character Sheet",
-    "wcessentials.rendermode_cycle": "Render Mode: %s"
+    "key.wcessentials.questbook": "Open Quest-Book",
+    "key.wcessentials.charactersheet": "Open Character Sheet",
+    "key.wcessentials.autowalk": "Toggle Auto-Walk",
+    "wcessentials.rendermode.cycle": "Render Mode: %s"
 }

@@ -17,20 +17,23 @@ import net.minecraft.client.util.math.MatrixStack;
 @Mixin(PlayerEntityRenderer.class)
 public abstract class HidePlayersMixin {
 
-    /**
+    /*
      * While in multiplayer, does not render players. The scoreboard check is to
      * prevent any "natural" PlayerEntity from being unrendered. The EntityName
      * check is to prevent npcs using player models from being unrendered.
      */
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     public void OnRender(AbstractClientPlayerEntity playerEntity, float f, float g, MatrixStack matrixStack,
-            VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+                         VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
 
         MinecraftClient client = MinecraftClient.getInstance();
 
         //TODO: Disable when outside of a town
-        if (!client.isInSingleplayer() && ClientUtils.connected && playerEntity.getScoreboard() != null
-                && !playerEntity.getEntityName().startsWith("§") && playerEntity != client.player) {
+        if (!client.isInSingleplayer()
+                && ClientUtils.connected
+                && playerEntity.getScoreboard() != null
+                && !playerEntity.getEntityName().startsWith("§")
+                && playerEntity != client.player) {
             switch (HidePlayers.getRenderMode()) {
                 case ALL:
                     return;

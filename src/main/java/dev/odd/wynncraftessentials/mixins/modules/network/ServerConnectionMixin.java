@@ -1,6 +1,6 @@
 package dev.odd.wynncraftessentials.mixins.modules.network;
 
-import org.apache.logging.log4j.LogManager;
+import net.minecraft.client.network.ServerAddress;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,32 +12,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import dev.odd.wynncraftessentials.utils.ClientUtils;
 import net.minecraft.client.MinecraftClient;
 
+import static dev.odd.wynncraftessentials.WynncraftEssentials.WCLogger;
+
 
 @Mixin(targets = "net/minecraft/client/gui/screen/ConnectScreen$1")
 public abstract class ServerConnectionMixin {
     
     @Shadow
     @Final
-    private String field_2414;
-
-    @Shadow
-    @Final
-    private int field_2415;
+    private ServerAddress field_33737;
 
     @Inject(
-            method = "run",
+            method = "run()V",
             at = @At(
                     value = "INVOKE",
-                    target = "net/minecraft/network/ClientConnection.send(Lnet/minecraft/network/Packet;)V",
+                    target = "Lnet/minecraft/network/ClientConnection;send(Lnet/minecraft/network/Packet;)V",
                     ordinal = 1,
                     shift = Shift.AFTER
             )
     )
     public void onServerConnected(final CallbackInfo ci) {
-        LogManager.getLogger().info("Connected to {}, {}", field_2414, field_2415);
-        if (field_2414.toLowerCase().contains("wynncraft")) {
+        String address = field_33737.getAddress();
+        WCLogger.info(String.format("Connected to %s:%s", address, field_33737.getPort()));
+        if (address.toLowerCase().contains("wynncraft")) {
             ClientUtils.connected = true;
-            ClientUtils.playerName = MinecraftClient.getInstance().player.getEntityName();
         }
     }
 }

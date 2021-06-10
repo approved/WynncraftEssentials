@@ -14,9 +14,9 @@ public abstract class AutowalkMixin {
     public void onTick(boolean sprinting, CallbackInfo ci) {
 		if(ClientUtils.autoWalk) {
             KeyboardInput input = ((KeyboardInput)(Object)this);
-            input.pressingForward = true;
-            input.movementForward = input.pressingForward == input.pressingBack ? 0.0F : (input.pressingForward ? 1.0F : -1.0F);
+            input.movementForward = input.pressingBack ? 0.0F : 1.0F;
             if (sprinting) {
+                // TODO: Remove the hardcoded 0.3D
                 input.movementForward = (float)((double)input.movementForward * 0.3D);
             }
 		}
